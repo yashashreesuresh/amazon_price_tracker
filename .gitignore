@@ -1,0 +1,8 @@
+__pycache__/
+.vscode/
+dbs/
+eggs/
+project_egg_info/
+build/
+project.egg-info/
+logs/
