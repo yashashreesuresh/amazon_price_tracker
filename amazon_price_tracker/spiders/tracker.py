@@ -62,6 +62,6 @@ class TrackerSpider(scrapy.Spider):
                     "discount_amount": discount_amount,
                     "discount_percentage": discount_percentage
                 }
-                if int(discount_percentage) >= 0:
+                if int(discount_percentage) >= 4:
                     self.send_email(MRP, discounted_price, discount_amount, discount_percentage)
                 
