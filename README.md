@@ -39,12 +39,14 @@ You can deploy your scrapy spider peridically on Heroku for free similar to peri
 #### Steps to periodically schedule scrapy spider in Heroku
 
 Follow the above [steps 1-9](https://github.com/yashashreesuresh/amazon_price_tracker#steps-to-deploy-to-heroku) on deploying to Heroku. Continue with the steps below:
-1. Install schedule module by executing `pip3 install schedule`.
-2. Create [periodic_scheduler.py](https://github.com/yashashreesuresh/amazon_price_tracker/blob/master/periodic_scheduler.py) python file to create a scheduler.
+1. Install modules required for scheduling by executing `pip3 install pytz` and `pip3 install apscheduler`.
+2. Create [periodic_scheduler.py](https://github.com/yashashreesuresh/amazon_price_tracker/blob/master/periodic_scheduler.py) python file to create a cron job.
 3. Update the Procfile to create a clock dyno `clock: python3 periodic_scheduler.py`.
 4. Update the requirement.txt file by executing `pip3 freeze > requirements.txt`.
 5. Push the code changes to heroku. `git add .` -> `git commit -m <commit_message>` -> `git push heroku master`.
 6. Execute `heroku ps:scale clock=1` to ensure the clock dyno component is a singleton process thereby avoiding scheduling duplicate jobs.
+
+NOTE: Refer [this](https://apscheduler.readthedocs.io/en/stable/modules/triggers/cron.html) doc for more details on the options provided by apscheduler cron trigger.
 
 ### Sending email in python :envelope_with_arrow:
 

@@ -1,7 +1,9 @@
+import pytz
 import requests
-import schedule
-import time
 import subprocess
+from apscheduler.schedulers.twisted import TwistedScheduler
+from twisted.internet import reactor
+
 
 def send_request():
     requests.post("https://rocky-meadow-70954.herokuapp.com/schedule.json", data={
@@ -12,7 +14,7 @@ def send_request():
 if __name__ == "__main__":
     subprocess.run("scrapyd-deploy local", shell=True, universal_newlines=True)
     print("Starting the periodic scheduler...")
-    schedule.every().hour.do(send_request)
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    scheduler = TwistedScheduler(timezone=pytz.timezone('Asia/Kolkata'))
+    scheduler.add_job(send_request, 'cron', day_of_week='mon-sun', hour='10', minute='00')
+    scheduler.start()
+    reactor.run()
