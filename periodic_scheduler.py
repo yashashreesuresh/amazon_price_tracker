@@ -12,7 +12,7 @@ def send_request():
     })
 
 if __name__ == "__main__":
-    subprocess.run("scrapyd-deploy local", shell=True, universal_newlines=True)
+    subprocess.run("scrapyd-deploy", shell=True, universal_newlines=True)
     print("Starting the periodic scheduler...")
     scheduler = TwistedScheduler(timezone=pytz.timezone('Asia/Kolkata'))
     scheduler.add_job(send_request, 'cron', day_of_week='mon-sun', hour='10', minute='00')

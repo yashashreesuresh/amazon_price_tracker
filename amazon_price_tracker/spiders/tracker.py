@@ -8,7 +8,7 @@ import scrapy
 class TrackerSpider(scrapy.Spider):
     name = 'tracker'
     allowed_domains = ['www.amazon.in']
-    start_urls = ['https://www.amazon.in/New-Apple-iPhone-Pro-256GB/dp/B08L5T2XSF']
+    start_urls = ['https://www.amazon.in/dp/B08L5VDDQ5']
    
     def clean_text(self, text):
         if text:
